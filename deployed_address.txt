@@ -1,0 +1,90 @@
+1_initial_migration.js
+======================
+
+   Deploying 'Migrations'
+   ----------------------
+   > transaction hash:    0xa11da92aff3c0fa202ba3efc29bbec561194d72f59d6d007a354fd45885e51c5
+   > Blocks: 1            Seconds: 10
+   > contract address:    0xd622CeE95cd749eF370B67FaEeca85A7BAF82cfe
+   > account:             0x0F84D25C1df867313627e5f9BFbC9D4d3e89E4b1 
+   > balance:             3.295053271998210872
+   > gas used:            238202
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00476404 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 29473215)
+   > confirmation number: 2 (block: 29473216)
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.00476404 ETH
+
+
+2_deploy_contracts.js
+=====================
+
+   Deploying 'EnlistmentToContract'
+   --------------------------------
+   > transaction hash:    0xd247def5765ba7090244b3284f38638dc9ae6a0a900329c3ab0e71207d914a47
+   > Blocks: 2            Seconds: 9
+   > contract address:    0x4F67Df2F2102F079b16a1D0B7ba1011D7dc64250
+   > account:             0x0F84D25C1df867313627e5f9BFbC9D4d3e89E4b1
+   > balance:             3.211915431998210872
+   > gas used:            4111124
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.08222248 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 29473223)
+   > confirmation number: 2 (block: 29473224)
+
+   Deploying 'SafeMath'
+   --------------------
+   > transaction hash:    0x1183f55bed8b3feeb91f07790aa6c2f3401d4a8707151b6b813e0171f1faec8b
+   > Blocks: 2            Seconds: 11
+   > contract address:    0xaE1d74Be5e909E030A022fde30c1B71d8573E934
+   > account:             0x0F84D25C1df867313627e5f9BFbC9D4d3e89E4b1
+   > balance:             3.210481151998210872
+   > gas used:            71714
+   > gas price:           20 gwei
+   > total cost:          0.00143428 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 29473231)
+   > confirmation number: 2 (block: 29473232)
+
+   Deploying 'RentToContract'
+   --------------------------
+   > transaction hash:    0x6ce54c5f257c5eca784caa44f627cef8f987b8a1135cf59b8d7cda3eacf05946                                              35cf59b8d7cda3eacf05946
+   > Blocks: 2            Seconds: 11
+   > contract address:    0xb74cf030ADE74BaaeF59d810B8f6328DEA4bddc7 
+   > account:             0x0F84D25C1df867313627e5f9BFbC9D4d3e89E4b1 
+   > balance:             3.176930011998210872
+   > gas used:            1677557
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.03355114 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 29473238)
+   > confirmation number: 2 (block: 29473239)
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:           0.1172079 ETH
+
+
+Summary
+=======
+> Total deployments:   4
+> Final cost:          0.12197194 ETH
+
