@@ -1,5 +1,8 @@
-// SPDX-License-Identifier: SEE LICENSE IN LICENSE
-pragma solidity 0.5.17;
+
+// SPDX-License-Identifier:MIT
+//pragma experimental ABIEncoderV2;
+pragma experimental ABIEncoderV2;
+pragma solidity >=0.4.21 <0.7.17;
 
 import "./RentToContract.sol";
 
@@ -119,6 +122,7 @@ contract EnlistmentToContract {
     function getEnlistments() public view returns (Enlistment[] memory) {
         return enlistments;
     }
+    
 
     // MAIN MODIFIERS THE CONTRACT WILL BE WORKING WITH
     
