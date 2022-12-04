@@ -19,16 +19,33 @@ contract EnlistmentToContract {
     uint private rentAmount;
     address private rentToContractAddress;
     RentToContract private rentToContract;
+    
 
     constructor(string memory landlordEmail, string memory streetName, int floorNr, int apartmentNr, int houseNr, int postalCode) public
     {   // CREATE A NEW ENLISTMENT STRUCT OBJECT FROM THE PASSED IN ARGUMENTS 
         enlistment = Enlistment(streetName, floorNr, apartmentNr, houseNr, postalCode);
         landlord = landlordEmail;
         owner = (msg.sender);
+        
+    }
+
+    function addEnlistmet(  string memory streetName,  int floorNr, int apartmentNr, int houseNr, int postalCode) public ownerOnly {
+        
+        require(bytes(streetName).length > 0, 'Must be a valid street Name');
+        
+        require(floorNr > 0, 'Must be a value');
+        
+        require(apartmentNr > 0, 'Must be a valid floreNr');
+        
+        require(houseNr > 0, 'Must be a valid houseNr');
+        
+        require(postalCode > 0, 'Must be a valid postalCode');
+        
+        enlistment = Enlistment(streetName, floorNr, apartmentNr, houseNr, postalCode);
     }
 
     // GETTER FUNCTIONS 
-
+ 
     function getOwner() public view ownerOnly() returns (address) {
         return owner;
     }
@@ -96,6 +113,15 @@ contract EnlistmentToContract {
     }
 
     // MAIN MODIFIERS THE CONTRACT WILL BE WORKING WITH
+    
+    modifier Owner {
+    require(msg.sender == owner);
+    _;
+    } 
+    modifier noActiveEnlistmet(string memory tenantEmail){
+        require(tenantOfferMap[tenantEmail].initialized == true);
+        _;
+    }
 
     modifier noActiveOffer(string memory tenantEmail) { // CHECKS IF THE TENANT (tenantEmail) INDEED HAS NO ACTIVE OFFER
         require(tenantOfferMap[tenantEmail].initialized == false || tenantOfferMap[tenantEmail].status == OfferStatus.REJECTED || tenantOfferMap[tenantEmail].status == OfferStatus.CANCELLED);
