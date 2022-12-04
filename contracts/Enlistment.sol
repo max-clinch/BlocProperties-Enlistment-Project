@@ -7,57 +7,6 @@ import "./RentToContract.sol";
 contract EnlistmentToContract {
 
     // MAIN VARIABLES THE CONTRACT WILL BE WORKING WITH
-    
-    address payable owner;
-    string landlord;
-    bool public locked = false;
-    Enlistment enlistment;
-    // 
-    mapping(string => Offer) tenantOfferMap;
-    mapping(string => AgreementDraft) tenantAgreementMap;
-    // 
-    uint private rentAmount;
-    address private rentToContractAddress;
-    RentToContract private rentToContract;
-    
-
-    constructor(string memory landlordEmail, string memory streetName, int floorNr, int apartmentNr, int houseNr, int postalCode) public
-    {   // CREATE A NEW ENLISTMENT STRUCT OBJECT FROM THE PASSED IN ARGUMENTS 
-        enlistment = Enlistment(streetName, floorNr, apartmentNr, houseNr, postalCode);
-        landlord = landlordEmail;
-        owner = (msg.sender);
-        
-    }
-
-    function addEnlistmet(  string memory streetName,  int floorNr, int apartmentNr, int houseNr, int postalCode) public ownerOnly {
-        
-        require(bytes(streetName).length > 0, 'Must be a valid street Name');
-        
-        require(floorNr > 0, 'Must be a value');
-        
-        require(apartmentNr > 0, 'Must be a valid floreNr');
-        
-        require(houseNr > 0, 'Must be a valid houseNr');
-        
-        require(postalCode > 0, 'Must be a valid postalCode');
-        
-        enlistment = Enlistment(streetName, floorNr, apartmentNr, houseNr, postalCode);
-    }
-
-    // GETTER FUNCTIONS 
- 
-    function getOwner() public view ownerOnly() returns (address) {
-        return owner;
-    }
-
-    function getLandlord() public view ownerOnly() returns (string memory) {
-        return landlord;
-    }
-
-    function getEnlistment() public view ownerOnly() returns (string memory, int, int, int, int) {
-        return (enlistment.streetName, enlistment.floorNr, enlistment.apartmentNr, enlistment.houseNr, enlistment.postalCode);
-    }
-
     // MAIN ENUMERATIONS THE CONTRACT WILL BE WORKING WITH
 
     enum OfferStatus { // CURRENT STATE OF ANY OFFER SUBMITTED FOR A PROPERTY
@@ -89,6 +38,8 @@ contract EnlistmentToContract {
         int postalCode;
     }
 
+    Enlistment[] public enlistments;
+
     struct Offer {
         bool initialized;
         int amount;
@@ -110,6 +61,63 @@ contract EnlistmentToContract {
         string landlordSignedHash;
         string tenantSignedHash;
         AgreementStatus status;
+    }
+    
+    address payable owner;
+    string landlord;
+    bool public locked = false;
+    Enlistment enlistment;
+    // 
+    mapping(string => Offer) tenantOfferMap;
+    mapping(string => AgreementDraft) tenantAgreementMap;
+    // 
+    uint private rentAmount;
+    address private rentToContractAddress;
+    RentToContract private rentToContract;
+    
+    event AddEnlistment(string streetName, int floorNr, int apartmentNr, int houseNr, int postalCode);
+
+    constructor(string memory landlordEmail, string memory streetName, int floorNr, int apartmentNr, int houseNr, int postalCode) public
+    {   // CREATE A NEW ENLISTMENT STRUCT OBJECT FROM THE PASSED IN ARGUMENTS 
+        enlistment = Enlistment(streetName, floorNr, apartmentNr, houseNr, postalCode);
+        landlord = landlordEmail;
+        owner = (msg.sender);
+        
+    }
+
+    function addEnlistmet(  string memory streetName,  int floorNr, int apartmentNr, int houseNr, int postalCode) public ownerOnly {
+        
+        require(bytes(streetName).length > 0, 'Must be a valid street Name');
+        
+        require(floorNr > 0, 'Must be a value');
+        
+        require(apartmentNr > 0, 'Must be a valid floreNr');
+        
+        require(houseNr > 0, 'Must be a valid houseNr');
+        
+        require(postalCode > 0, 'Must be a valid postalCode');
+        
+        enlistment = Enlistment(streetName, floorNr, apartmentNr, houseNr, postalCode);
+        enlistments.push(Enlistment(streetName, floorNr, apartmentNr, houseNr, postalCode));
+        emit AddEnlistment(streetName, floorNr, apartmentNr, houseNr, postalCode);
+    }
+
+    // GETTER FUNCTIONS 
+ 
+    function getOwner() public view ownerOnly() returns (address) {
+        return owner;
+    }
+
+    function getLandlord() public view ownerOnly() returns (string memory) {
+        return landlord;
+    }
+
+    function getEnlistment() public view ownerOnly() returns (string memory, int, int, int, int) {
+        return (enlistment.streetName, enlistment.floorNr, enlistment.apartmentNr, enlistment.houseNr, enlistment.postalCode);
+    }
+
+    function getEnlistments() public view returns (Enlistment[] memory) {
+        return enlistments;
     }
 
     // MAIN MODIFIERS THE CONTRACT WILL BE WORKING WITH
