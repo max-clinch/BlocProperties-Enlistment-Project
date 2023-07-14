@@ -1,7 +1,5 @@
 
 // SPDX-License-Identifier:MIT
-//pragma experimental ABIEncoderV2;
-pragma experimental ABIEncoderV2;
 pragma solidity >=0.4.21 <0.7.17;
 
 import "./RentToContract.sol";
