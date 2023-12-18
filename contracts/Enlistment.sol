@@ -74,15 +74,15 @@ contract EnlistmentToContract {
     // 
     uint private rentAmount;
     address private rentToContractAddress;
-    RentToContract private rentToContract;
+    //RentToContract private rentToContract;
     
     event AddEnlistment(string streetName, int floorNr, int apartmentNr, int houseNr, int postalCode);
 
-    constructor(string memory landlordEmail, string memory streetName, int floorNr, int apartmentNr, int houseNr, int postalCode) public
+    constructor(string memory landlordEmail, string memory streetName, int floorNr, int apartmentNr, int houseNr, int postalCode)
     {   // CREATE A NEW ENLISTMENT STRUCT OBJECT FROM THE PASSED IN ARGUMENTS 
         enlistment = Enlistment(streetName, floorNr, apartmentNr, houseNr, postalCode);
         landlord = landlordEmail;
-        owner = (msg.sender);
+        owner = payable(msg.sender);
         
     }
 

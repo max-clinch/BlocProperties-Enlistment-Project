@@ -76,9 +76,9 @@ contract RentContract {
         _;
     }
 
-    constructor(string memory _tenantEmail, string memory _tenantName, string memory _landlordName, uint _amount, uint _duration) public {
+    constructor(string memory _tenantEmail, string memory _tenantName, string memory _landlordName, uint _amount, uint _duration) {
         contractExpirationDate = block.timestamp.add(_duration);
-        owner = msg.sender;
+        owner = payable(msg.sender);
         tenant = _tenantName;
         landlord = _landlordName;
 
@@ -120,7 +120,7 @@ contract RentContract {
     }
 
     function killContract() public ownerOnly() {
-        selfdestruct(address(uint160(owner)));
+        owner.transfer(address(this).balance);
     }
 
     function rentContractExpired() public view returns (bool) {
