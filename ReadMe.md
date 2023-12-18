@@ -83,3 +83,7 @@ https://github.com/max-clinch/BlocProperties-Enlistment-Project.git
 ### Approve enlistment
 
 Approve property enlistment after manual validation. Successful aproval triggers Ethereum smart contract deployment.
+
+## Comtract ADDRESS 
+# Elistment contract: 0x1D8720774d98409730561f3552B1642B2655D208
+# RentContract: 0xf485944cc41aCe350D1891CF02756D5DA7aE4EdF
