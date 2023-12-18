@@ -111,7 +111,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -124,7 +125,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -170,7 +172,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -183,7 +186,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -216,7 +220,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -256,7 +261,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -279,7 +285,8 @@
       "name": "sendOffer",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -292,7 +299,8 @@
       "name": "cancelOffer",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -331,7 +339,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -349,7 +358,8 @@
       "name": "reviewOffer",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -402,7 +412,8 @@
       "name": "submitDraft",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -431,7 +442,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -470,7 +482,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -499,7 +512,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -518,7 +532,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -536,7 +551,8 @@
       "name": "reviewAgreement",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -554,7 +570,8 @@
       "name": "landlordSignAgreement",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -572,7 +589,8 @@
       "name": "tenantSignAgreement",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -585,7 +603,8 @@
       "name": "cancelAgreement",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -598,7 +617,8 @@
       "name": "receiveFirstMonthRent",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -616,7 +636,8 @@
       "name": "receiveMonthlyRent",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"landlordEmail\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"streetName\",\"type\":\"string\"},{\"internalType\":\"int256\",\"name\":\"floorNr\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"apartmentNr\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"houseNr\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"postalCode\",\"type\":\"int256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"streetName\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"int256\",\"name\":\"floorNr\",\"type\":\"int256\"},{\"indexed\":false,\"internalType\":\"int256\",\"name\":\"apartmentNr\",\"type\":\"int256\"},{\"indexed\":false,\"internalType\":\"int256\",\"name\":\"houseNr\",\"type\":\"int256\"},{\"indexed\":false,\"internalType\":\"int256\",\"name\":\"postalCode\",\"type\":\"int256\"}],\"name\":\"AddEnlistment\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"streetName\",\"type\":\"string\"},{\"internalType\":\"int256\",\"name\":\"floorNr\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"apartmentNr\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"houseNr\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"postalCode\",\"type\":\"int256\"}],\"name\":\"addEnlistmet\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"}],\"name\":\"cancelAgreement\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"}],\"name\":\"cancelOffer\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"enlistments\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"streetName\",\"type\":\"string\"},{\"internalType\":\"int256\",\"name\":\"floorNr\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"apartmentNr\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"houseNr\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"postalCode\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"}],\"name\":\"getAgreementDetails\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"}],\"name\":\"getAgreementHashes\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"}],\"name\":\"getAgreementParticipants\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"}],\"name\":\"getAgreementStatus\",\"outputs\":[{\"internalType\":\"enum EnlistmentToContract.AgreementStatus\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getEnlistment\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getEnlistments\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"streetName\",\"type\":\"string\"},{\"internalType\":\"int256\",\"name\":\"floorNr\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"apartmentNr\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"houseNr\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"postalCode\",\"type\":\"int256\"}],\"internalType\":\"struct EnlistmentToContract.Enlistment[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLandlord\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"}],\"name\":\"getOffer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"},{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"enum EnlistmentToContract.OfferStatus\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"landlordSignedHash\",\"type\":\"string\"}],\"name\":\"landlordSignAgreement\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"locked\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"}],\"name\":\"receiveFirstMonthRent\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"receiveMonthlyRent\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"result\",\"type\":\"bool\"}],\"name\":\"reviewAgreement\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"result\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"}],\"name\":\"reviewOffer\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"int256\",\"name\":\"amount\",\"type\":\"int256\"},{\"internalType\":\"string\",\"name\":\"tenantName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"}],\"name\":\"sendOffer\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"landlordName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"agreementTenantName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"agreementTenantEmail\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"leaseStart\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"handoverDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"leasePeriod\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"otherTerms\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"hashStr\",\"type\":\"string\"}],\"name\":\"submitDraft\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tenantEmail\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"tenantSignedHash\",\"type\":\"string\"}],\"name\":\"tenantSignAgreement\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Enlistment.sol\":\"EnlistmentToContract\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Enlistment.sol\":{\"keccak256\":\"0x1a653df22dca202275bcdb944f1b2a57d03e3dd54b42152d11665fb12fb5122f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://27370738ce6652fbfa225763154a504fe1747881c345d36ab7e42557ed95c98d\",\"dweb:/ipfs/QmTn6Z6gFoFUSbqZnELHSjid2E2LrgaFi3E7aVRwJ1UBP4\"]},\"project:/contracts/RentToContract.sol\":{\"keccak256\":\"0x61663354b20bbd1d19dc57af1c6ce1bab6417a5a5db7c5e9ed5bd830e7fba2ae\",\"license\":\"SEE LICENSE IN LICENSE\",\"urls\":[\"bzz-raw://60005693cbaf455770988dbc9cbba5ceb730804f601be97a312c0c681b36c7f7\",\"dweb:/ipfs/QmQ1XreacYDMiZ3dAPUvpyALoi4gdA8S1VdMrf2YDgiYDr\"]},\"project:/contracts/SafeMath.sol\":{\"keccak256\":\"0x2cb74af89497ee8279393119831fbfe3204998380204e0c65eec93cfa4ba6266\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f1f3719b45e85a06cd89dcd665a06791078ca1a78bf9eab2af3db26c3bb0dd20\",\"dweb:/ipfs/QmXhg2BYWxxZSBywCTM69nXWmBGqptSzYyaX97ihYqyx6V\"]}},\"version\":1}",
@@ -29989,8 +30010,8 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x5927D6922B9687E2Ce72E32A3BBAf8624460A4d7",
-      "transactionHash": "0x3532d9a53cca1e6d1b171b3d4cd0b1ffa2664a162f0579f4408ccc72a6550cfd"
+      "address": "0x64fDe62CD464Ced790eCbFfb68134E1e24E4739E",
+      "transactionHash": "0x6c041bd53480a5e68f49de7eccad49ddcd2005db3666cefa8a48d0a42c96f857"
     },
     "80001": {
       "events": {},
@@ -30000,7 +30021,8 @@
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2023-12-18T13:09:35.892Z",
+  "updatedAt": "2023-12-18T13:59:20.000Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},

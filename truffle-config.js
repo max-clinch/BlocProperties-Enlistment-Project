@@ -6,16 +6,16 @@ require('dotenv').config(); // Load .env file
 
 module.exports = {
   networks: {
+    //matic: {
+    //  //provider: () => new HDWalletProvider(process.env.mnemonic, `https://polygon-mumbai.infura.io/v3/4458cf4d1689497b9a38b1d6bbf05e78`),
+    //  host: "127.0.0.1",     // Localhost (default: none)
+    //  port: 8545,            // Standard Ethereum port (default: none)
+    //  network_id: 80001,
+    //  gas: 5500000,       // Any network (default: none)
+    //},
     matic: {
-      //provider: () => new HDWalletProvider(process.env.mnemonic, `https://polygon-mumbai.infura.io/v3/4458cf4d1689497b9a38b1d6bbf05e78`),
-      host: "127.0.0.1",     // Localhost (default: none)
-      port: 8545,            // Standard Ethereum port (default: none)
-      network_id: 80001,
-      gas: 5500000,       // Any network (default: none)
-    },
-    matic: {
-      provider: () => new HDWalletProvider(process.env.mnemonic, `https://polygon-mumbai.infura.io/v3/4458cf4d1689497b9a38b1d6bbf05e78`),
-      network_id: 80001,
+      provider: () => new HDWalletProvider(process.env.mnemonic, `https://polygon-mumbai.g.alchemy.com/v2/NwYJ0aX7ItPuk9IKn1Wh5tY9bsjuv4eq`),
+      network_id: 5777,
       confirmations: 2,
       timeoutBlocks: 2,
       skipDryRun: true,

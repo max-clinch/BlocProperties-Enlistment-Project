@@ -1,0 +1,84 @@
+Starting migrations...
+=====================
+
+
+1_initial_migration.js
+======================
+
+   Replacing 'Migrations'
+   ----------------------
+   > transaction hash:    0x59579a447bc20934d03a1847b1913b46fc5d5b50be758e8a6674e250e0a97deb
+   > Blocks: 0            Seconds: 0
+   > contract address:    0x6133547424ac9F2383eed848D38aC335dCc6Fcac
+   > block number:        1
+   > block timestamp:     1702907944
+   > account:             0x19a38c1f804f1E98c577A97c0327E6761c6F2FB9
+   > balance:             99.99454424
+   > gas used:            272788 (0x42994)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00545576 ETH
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.00545576 ETH
+
+
+2_deploy_contracts.js
+=====================
+
+   Replacing 'EnlistmentToContract'
+   --------------------------------
+   > transaction hash:    0x6c041bd53480a5e68f49de7eccad49ddcd2005db3666cefa8a48d0a42c96f857
+   > Blocks: 0            Seconds: 0
+   > contract address:    0x64fDe62CD464Ced790eCbFfb68134E1e24E4739E
+   > block number:        3
+   > block timestamp:     1702907948
+   > account:             0x19a38c1f804f1E98c577A97c0327E6761c6F2FB9
+   > balance:             99.9259244
+   > gas used:            3388457 (0x33b429)       
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.06776914 ETH
+
+
+   Replacing 'SafeMath'
+   --------------------
+   > transaction hash:    0x5597916d25e8fd6e0e194f21a432f8a6e788a5abab350b14583026363abad070
+   > Blocks: 0            Seconds: 0
+   > contract address:    0x8F4835e9Bdf128BD8e5fff7f2e0354a6Ca526F13
+   > block number:        4
+   > block timestamp:     1702907950
+   > account:             0x19a38c1f804f1E98c577A97c0327E6761c6F2FB9
+   > balance:             99.92447878
+   > gas used:            72281 (0x11a59)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00144562 ETH
+
+
+   Replacing 'RentToContract'
+   --------------------------
+   > transaction hash:    0x512cc215ff2c6ae8706fdd7266ca01b269f24f1c734fa1a2963a3ce1f812b285
+   > Blocks: 1            Seconds: 4
+   > contract address:    0xE5A1766f925d33F28E06cAB1b5E9BC3C3690a195
+   > block number:        5
+   > block timestamp:     1702907956
+   > account:             0x19a38c1f804f1E98c577A97c0327E6761c6F2FB9
+   > balance:             99.89154364
+   > gas used:            1646757 (0x1920a5)       
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.03293514 ETH
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:           0.1021499 ETH
+
+Summary
+=======
+> Total deployments:   4
+> Final cost:          0.10760566 ETH
+
