@@ -1,6 +1,6 @@
 
 // SPDX-License-Identifier:MIT
-pragma solidity >=0.4.21 <0.7.17;
+pragma solidity ^0.8.0;
 
 import "./RentToContract.sol";
 

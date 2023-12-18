@@ -1,204 +1,129 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
-pragma solidity 0.5.17;
+pragma solidity ^0.8.0;
 
+import "./SafeMath.sol";
 
-// import "github.com/oraclize/ethereum-api/oraclizeAPI.sol"; // ORACLIZE LIBRARY TO BE INTEGRATED SOON ..
-import "./SafeMath.sol"; // LIBRARY TO MAKE SAFE MATHEMATICAL CALCULATIONS IN THIS CONTRACT
+contract RentContract {
+    using SafeMath for uint;
 
+    bool public circuitBreakerStopped = false;
+    address payable public owner;
+    uint public contractExpirationDate;
+    string public landlord;
+    string public tenant;
+    uint public totalRentPaid;
+    Rent public rentSetup;
+    RentPayment[] public payments;
 
-// contract RentToContract is usingOraclize {
-contract RentToContract {
-   
-  /* // ALL THE STUFF YOU'LL NEED TO INTEGRATE WITH ORACLIZE, USING Provable
-  uint public balance;
+    mapping(address => bool) public admins;
+    mapping(string => Rent) public rentSetupMap;
 
-  event Log(string text);
-  
+    event RentPaymentMade(string tenantEmail, uint paymentDate, uint amount);
 
-  function __callback(bytes32 _myid, string memory _result) {
-      require (msg.sender == oraclize_cbAddress());
-      Log(_result);
-      price = parseInt(_result, 2); // let's save it as $ cents
-  }
-  
-  function updatePrice() public payable {
-    emit Log("Oraclize query was sent, waiting for the answer..");
-    oraclize_query("URL","json(https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD).USD");
-    
-    if (oraclize_getPrice("URL") > balance) {
-      emit Log("Oraclize query was NOT sent, please add some ETH to cover for the query fee");
-    } else {
-      emit Log("Oraclize query was sent, standing by for the answer..");
-      oraclize_query("URL", "json(https://api.pro.coinbase.com/products/ETH-USD/ticker).price");
+    struct Rent {
+        string landlordName;
+        string tenantName;
+        string tenantEmail;
+        RentPayment firstPayment;
+        uint firstPaymentDate;
+        uint rentExpirationDate;
     }
-  }
-  */
 
-  using SafeMath  for uint;
-  
-  bool public circuitBreakerStopped = false;
-  address payable owner;
-  uint contractExpired; // THE RENT EXPIRATION DATE 
-  // 
-  string landlord;
-  string tenant;
-  uint totalRentPaid;
-  Rent rentSetup;
-  RentPayment[] payments;
-  // 
-  mapping(address => bool) admins;
-  mapping(string => Rent) rentSetupMap;
+    struct RentPayment {
+        string tenantEmail;
+        uint paymentDate;
+        uint amount;
+    }
 
-  // GETTER FUNCTIONS 
+    modifier validateTenant(string memory tenantEmail) {
+        require(keccak256(abi.encodePacked(tenantEmail)) == keccak256(abi.encodePacked(rentSetup.tenantEmail)), "Invalid tenant email");
+        require(keccak256(abi.encodePacked(tenant)) == keccak256(abi.encodePacked(rentSetup.tenantName)), "Invalid tenant name");
+        _;
+    }
 
-  function getOwner() public view ownerOnly() returns (address) {
-    return owner;
-  }
+    modifier validateAmount(uint amount) {
+        require(amount > 0, "Amount should be greater than 0");
+        _;
+    }
 
-  function getLandlord() public view ownerOnly() returns (string memory) {
-    return landlord;
-  }
+    modifier isNotDeprecated() {
+        require(!rentContractExpired(), "Contract is deprecated");
+        _;
+    }
 
-  function getTenant() public view ownerOnly() returns (string memory) {
-    return tenant;
-  }
+    modifier isDeprecated() {
+        require(rentContractExpired(), "Contract is not deprecated");
+        _;
+    }
 
-  function getTotalRentPaid() public view ownerOnly() returns (uint) {
-    return totalRentPaid;
-  }
+    modifier ownerOnly() {
+        require(msg.sender == owner, "Not the owner");
+        _;
+    }
 
-  function getNumberOfPayments() public view ownerOnly() returns (uint) {
-    return payments.length;
-  }
+    modifier onlyAdmin() {
+        require(admins[msg.sender], "Not an admin");
+        _;
+    }
 
-  function getRent() public view ownerOnly() returns (string memory, string memory, uint, uint) {
-    return (rentSetup.landlordName, rentSetup.tenantName, rentSetup.firstPaymentDate, rentSetup.rentExpirationDate);
-  }
-  // 
-  event RentPaymentMade(string tenantEmail, uint paymentDate, uint amount);
-  // 
-  struct Rent {
-    string landlordName;
-    string tenantName;
-    string tenantEmail;
-    RentPayment firstPayment;
-    uint firstPaymentDate;
-    uint rentExpirationDate;
-  }
+    modifier stopInEmergency() {
+        require(!circuitBreakerStopped, "Emergency stop is active");
+        _;
+    }
 
-  struct RentPayment {
-    string tenantEmail;
-    uint paymentDate;
-    uint amount;
-  }
+    modifier onlyInEmergency() {
+        require(circuitBreakerStopped, "Not in emergency stop");
+        _;
+    }
 
-  modifier validateTenant(string memory tenantEmail) { // CHECKS IF THE TENANT (tenantEmail) INDEED IN THE RENT PAYER
-    string memory te = rentSetup.tenantEmail;
-    string memory tn = rentSetupMap[tenantEmail].tenantName;
-    string memory mainTn = tenant;
-    require((keccak256(abi.encodePacked(tenantEmail)) == keccak256(abi.encodePacked(te))), "NOT THE RIGHT TENANT");
-    require((keccak256(abi.encodePacked(mainTn)) == keccak256(abi.encodePacked(tn))), "NOT THE RIGHT TENANT");
-    _;
-  }
-  
-  modifier validateAmount(uint amount) { // CHECKS IF THE AMOUNT IS HIGHER THAN 0
-    throwsErrorIfZero(amount); // NO NEED TO WORK WITH THE RETURN VALUE FOR block.timestamp ..
-    _;
-  }
+    constructor(string memory _tenantEmail, string memory _tenantName, string memory _landlordName, uint _amount, uint _duration) public {
+        contractExpirationDate = block.timestamp.add(_duration);
+        owner = msg.sender;
+        tenant = _tenantName;
+        landlord = _landlordName;
 
-  function throwsErrorIfZero(uint num) private pure returns (uint) {
-    require(num != 0);
-    return num;
-  }
+        RentPayment memory firstPayment = RentPayment({
+            tenantEmail: _tenantEmail,
+            paymentDate: block.timestamp,
+            amount: _amount
+        });
 
-  modifier isNotDeprecated {
-    if(!rentContractExpired()) _;
-  }
+        rentSetup = Rent({
+            tenantEmail: _tenantEmail,
+            tenantName: _tenantName,
+            landlordName: _landlordName,
+            firstPayment: firstPayment,
+            firstPaymentDate: firstPayment.paymentDate,
+            rentExpirationDate: contractExpirationDate
+        });
 
-  modifier isDeprecated {
-    if(rentContractExpired()) _;
-  }
+        rentSetupMap[_tenantEmail] = rentSetup;
+        payments.push(firstPayment);
+        totalRentPaid = totalRentPaid.add(firstPayment.amount);
+    }
 
-  function rentContractExpired() private view returns (bool) {
-    return block.timestamp > contractExpired;
-  }
+    function receiveMonthlyRent(string memory _tenantEmail, uint _amount) public payable
+        ownerOnly()
+        isNotDeprecated()
+        validateAmount(_amount)
+        validateTenant(_tenantEmail)
+    {
+        RentPayment memory payment = RentPayment({
+            tenantEmail: _tenantEmail,
+            paymentDate: block.timestamp,
+            amount: _amount
+        });
 
-  modifier ownerOnly() {
-    require(msg.sender == owner);
-    _;
-  }
+        payments.push(payment);
+        totalRentPaid = totalRentPaid.add(payment.amount);
+        emit RentPaymentMade(payment.tenantEmail, payment.paymentDate, payment.amount);
+    }
 
-  modifier onlyAdmin {
-    require(admins[msg.sender] == true, "NOT AN ADMIN");
-    _;
-  }
+    function killContract() public ownerOnly() {
+        selfdestruct(address(uint160(owner)));
+    }
 
-  function addAdmin(address _a) private onlyAdmin returns (bool) {
-    admins[_a] = true;
-    return true;
-  }
-
-  modifier stopInEmergency { require(!circuitBreakerStopped, "..."); _; }
-  modifier onlyInEmergency { require(circuitBreakerStopped, "..."); _; }
-  
-  /* SAMPLE FUNCTIONS TO TEST THE CIRCUIT BREAKER DESIGN PATTERN ..
-  function deposit() public stopInEmergency {}
-  function withdraw() public onlyInEmergency {} 
-  */
-
-
-  constructor(string memory tenantEmail, string memory tenantName, string memory landlordName, uint amount, uint duration) public {
-    contractExpired = block.timestamp + duration; // SET THE RENT duration AS THE DATE THAT THIS CONTRACT TO EXPIRE (Auto Deprecate Design Pattern)
-    owner = (msg.sender); 
-    // addAdmin(msg.sender);
-    tenant = tenantName; landlord = landlordName;
-    RentPayment memory payment1 = RentPayment({
-      tenantEmail: tenantEmail,
-      paymentDate: block.timestamp,
-      amount: amount
-    }); // SETUP THE FIRST RENT PAYMENT OBJECT
-    rentSetup = Rent({
-      tenantEmail: tenantEmail,
-      tenantName: tenantName,
-      landlordName: landlordName,
-      firstPayment: payment1,
-      firstPaymentDate: payment1.paymentDate,
-      rentExpirationDate: contractExpired
-    }); // SETUP THE RENT OBJECT
-    rentSetupMap[tenantEmail] = rentSetup; // DO THIS IN CASE IN FUTURE, YOU'LL WANT TO MANAGE MULTIPLE RENT SETUPS
-    payments.push(payment1); // LET'S NOT emit THE RentPaymentMade EVENT ON THE 1ST PAYMENT
-    totalRentPaid = totalRentPaid.add(payment1.amount);
-  }
-
-  function receiveMonthlyRent(string memory tenantEmail, uint amount) public payable
-    ownerOnly() 
-    // onlyAdmin()
-    isNotDeprecated() 
-    validateAmount(amount)
-    validateTenant(tenantEmail) 
-  { // WHEN EXPANDING THE PLATFORM, THIS FUNCTION SHOULD BE ABLE TO RECEIVE RENT IN ETHER TOO ..
-    RentPayment memory payment = RentPayment({
-      tenantEmail: tenantEmail,
-      paymentDate: block.timestamp,
-      amount: amount
-    }); // SETUP A RENT PAYMENT OBJECT
-    payments.push(payment); // ADD RENT payment, THEN EMIT THE RentPaymentMade EVENT
-    totalRentPaid = totalRentPaid.add(payment.amount);
-    emit RentPaymentMade(payment.tenantEmail, payment.paymentDate, payment.amount);
-  }
-
-  function killContract() public ownerOnly() {
-    selfdestruct(address(uint160(owner))); // TAKES AN ADDRESS OF CONTRACT TO KILL
-  }
-
-  // FALLBACK FUNCTION TO RUN WHENEVER THERE'S SOME KINDA ISSUE ..
-  function() external payable { // NO function name, params, or return values ..
-      /* THIS FALLBACK FUNCTION WILL EXECUTE IF THE CLIENT CALLS A FUNCTION
-        THAT DOESN'T EXIST IN THIS CONTRACT (i.e. funct's identifier isn't defined)
-        CONTRACTS CAN HAVE ONLY 1 FALLBACK FUNCTION
-        AUTOMATICALLY HAS A GAS LIMIT OF 2300, 
-        MAKE FALLBACK FUNCTIONS AS CHEAP AS POSSIBLE
-      */
-   }
-
+    function rentContractExpired() public view returns (bool) {
+        return block.timestamp > contractExpirationDate;
+    }
 }
